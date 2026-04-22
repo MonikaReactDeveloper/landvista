@@ -6,10 +6,13 @@
 // router.use("/auth", authRoutes);
 
 // export default router;
+
 import express from "express";
 import authRoutes from "../modules/auth/auth.routes.js";
 import { authMiddleware } from "../middleware/auth.middleware.js";
 import { checkRole } from "../middleware/role.middleware.js";
+import serviceRoutes from "./serviceRoutes.js";
+import insightRoutes from "./insightRoutes.js";
 
 const router = express.Router();
 
@@ -20,6 +23,8 @@ router.get("/", (req, res) => {
 
 // ✅ mount auth routes
 router.use("/auth", authRoutes);
+router.use("/services", serviceRoutes);
+router.use("/insights", insightRoutes);
 
 // ✅ Admin route
 // 🔥 ADMIN
