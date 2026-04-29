@@ -28,8 +28,8 @@ export default function AboutPage() {
     <div className="bg-landvista-bg text-landvista-charcoal">
 <Navbar/>
       {/* ================= HERO ================= */}
-          <section className="bg-landvista-green text-white">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-16 md:py-20">
+          <section className="bg-landvista-bg text-landvista-blue">
+      <div className="max-w-6xl mx-auto px-6 md:px-10 py-16 md:py-20">
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
 
@@ -40,18 +40,18 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="max-w-[560px]"
           >
-            <h1 className="text-[32px] md:text-[48px] font-semibold mb-6 leading-tight">
+            <h1 className="text-[32px] md:text-[48px] font-semibold mb-6 leading-tight text-landvista-charcoal">
               About TerraSignal
             </h1>
 
-            <p className="text-white/80 text-[16px] md:text-[18px] mb-8 leading-relaxed">
+            <p className="text-landvista-blue text-[16px] md:text-[18px] mb-8 leading-relaxed">
               TerraSignal is an institutional land intelligence infrastructure designed to bring structure, clarity, and discipline to land decision-making
             </p>
 
             {/* CTA */}
             <a
               href="/request-access"
-              className="inline-flex items-center gap-2 bg-white text-landvista-green px-6 py-3 text-sm font-medium hover:opacity-90 transition"
+              className="inline-flex items-center gap-2 bg-landvista-blue text-white px-6 py-3 text-sm font-medium hover:opacity-90 transition"
             >
               Request Access
             </a>
@@ -80,7 +80,7 @@ export default function AboutPage() {
 
       {/* ================= PLATFORM DEFINITION ================= */}
        <section className="py-20 px-6 md:px-10 bg-landvista-bg">
-      <div className="max-w-[1200px] mx-auto">
+      <div className="max-w-6xl mx-auto">
 
         {/* HEADING */}
         <div className="text-center mb-14">
@@ -128,7 +128,7 @@ export default function AboutPage() {
 
       {/* ================= WHY IT EXISTS ================= */}
       <section className="bg-white py-20 px-6 md:px-10">
-        <div className="max-w-[1100px] mx-auto grid md:grid-cols-2 gap-12">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
 
           {/* LEFT */}
           <div>
@@ -158,7 +158,7 @@ export default function AboutPage() {
 
       {/* ================= FOUNDER NOTE ================= */}
      <section className="py-20 px-6 md:px-10 bg-landvista-bg">
-      <div className="max-w-[1200px] mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
 
         {/* ================= IMAGE ================= */}
         <motion.div
@@ -247,7 +247,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-<section className="bg-landvista-green text-white py-20 text-center px-6">
+<section className="bg-landvista-blue text-white py-20 text-center px-6">
         <h2 className="text-[30px] font-semibold mb-4">
           Access TerraSignal
         </h2>
@@ -294,7 +294,7 @@ export default function AboutPage() {
         <div className="text-center mt-10">
           <a
             href="/request-access"
-            className="bg-landvista-green text-white px-6 py-3 text-sm font-medium"
+            className="bg-landvista-blue text-white px-6 py-3 text-sm font-medium"
           >
             Request Access
           </a>

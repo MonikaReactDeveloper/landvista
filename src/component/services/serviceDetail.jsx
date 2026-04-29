@@ -1,6 +1,9 @@
 import React from "react";
 import { services } from "../../data/services";
 import { useParams } from "react-router-dom";
+import Navbar from "../homePage/navbar";
+import Footer from "../homePage/footer";
+import Breadcrumbs from "../homePage/Breadcrumbs";
 
 
 export default function ServiceDetail() {
@@ -15,7 +18,8 @@ export default function ServiceDetail() {
 
   return (
     <div className="bg-landvista-bg">
-
+<Navbar/>
+<Breadcrumbs/>
       {/* HERO */}
       <section className="max-w-[1440px] mx-auto px-6 md:px-10 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
 
@@ -38,7 +42,7 @@ export default function ServiceDetail() {
         </div>
 
       </section>
-
+<Footer/>
     </div>
   );
 }

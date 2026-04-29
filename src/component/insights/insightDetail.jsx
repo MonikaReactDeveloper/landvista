@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { insights } from "../../data/insights";
 import Navbar from "../homePage/navbar";
+import Breadcrumbs from "../homePage/Breadcrumbs";
 
 export default function InsightDetail() {
   const { slug } = useParams();
@@ -16,7 +17,7 @@ export default function InsightDetail() {
   return (
     <>
       <Navbar />
-
+<Breadcrumbs/>
       <section className="bg-landvista-bg py-16 md:py-24">
         <div className="max-w-[1000px] mx-auto px-6">
 

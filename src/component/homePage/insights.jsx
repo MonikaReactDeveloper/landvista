@@ -33,7 +33,7 @@ const insights = [
 export default function InsightsSection() {
   return (
     <section className="w-full bg-landvista-bg py-16 md:py-24">
-      <div className="max-w-[1440px] mx-auto px-6 md:px-10">
+      <div className="max-w-6xl mx-auto px-6 md:px-10">
 
         {/* HEADER */}
         <div className="mb-12 md:mb-16">

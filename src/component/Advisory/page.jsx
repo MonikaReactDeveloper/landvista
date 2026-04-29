@@ -59,37 +59,102 @@ export default function AdvisoryPage() {
     <div className="bg-landvista-bg min-h-screen">
 <Navbar/>
       {/* ================= HERO ================= */}
-      <section className="bg-landvista-green text-white py-20 px-6 md:px-10">
+      <section className="bg-landvista-bg text-landvista-charcoal py-20 px-6 md:px-10">
         <div className="max-w-[1100px] mx-auto text-center">
-          <h1 className="text-[36px] md:text-[48px] font-semibold mb-4">
+          <h1 className="text-[36px] md:text-[48px] font-semibold mb-4 text-landvista-charcoal">
             Request Access
           </h1>
-          <p className="text-white/80 text-[16px] md:text-[18px] mb-3">
+          <p className=" text-[16px] md:text-[18px] mb-3">
             Access to TerraSignal is limited to qualified participants and is subject to structured review and approval
           </p>
-          <p className="text-white/60 text-sm">
+          <p className="text-landvista-muted text-sm">
             This is a controlled intelligence platform with restricted access
           </p>
         </div>
       </section>
 
       {/* ================= ACCESS EXPLANATION ================= */}
-      <section className="py-16 px-6 md:px-10">
-        <div className="max-w-[900px] mx-auto text-center">
-          <p className="text-[18px] text-landvista-charcoal mb-4">
-            Access to TerraSignal requires:
-          </p>
-          <ul className="space-y-2 text-landvista-grey">
-            <li>• Qualification review</li>
-            <li>• NDA acceptance</li>
-            <li>• Controlled approval</li>
-          </ul>
+      <section className="py-16 px-6 md:px-10 bg-landvista-bg">
+  <div className="max-w-[1200px] mx-auto text-center mb-10">
+    <p className="text-[20px] md:text-[22px] font-medium text-landvista-charcoal">
+      Access to TerraSignal requires
+    </p>
+    <p className="text-sm text-landvista-muted mt-2">
+      Structured onboarding ensures controlled intelligence access
+    </p>
+  </div>
 
-          <p className="mt-6 text-sm text-landvista-muted">
-            The platform is not publicly accessible and is designed for institutional participants only
-          </p>
-        </div>
-      </section>
+  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1200px] mx-auto">
+
+    {/* CARD 1 */}
+    <div className="relative group h-[220px] rounded-lg overflow-hidden shadow">
+      <img
+        src="https://images.unsplash.com/photo-1554224155-6726b3ff858f"
+        alt="Qualification"
+        className="absolute w-full h-full object-cover"
+      />
+
+      <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition" />
+
+      <div className="relative z-10 h-full flex flex-col justify-end p-4 text-left">
+        <h3 className="text-white text-lg font-semibold">
+          Qualification Review
+        </h3>
+        <p className="text-white/80 text-sm mt-1 opacity-0 group-hover:opacity-100 transition">
+          Each request undergoes structured eligibility evaluation
+        </p>
+      </div>
+    </div>
+
+    {/* CARD 2 */}
+    <div className="relative group h-[220px] rounded-lg overflow-hidden shadow">
+      <img
+        src="https://images.unsplash.com/photo-1521791136064-7986c2920216"
+        alt="NDA"
+        className="absolute w-full h-full object-cover"
+      />
+
+      <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition" />
+
+      <div className="relative z-10 h-full flex flex-col justify-end p-4 text-left">
+        <h3 className="text-white text-lg font-semibold">
+          NDA Acceptance
+        </h3>
+        <p className="text-white/80 text-sm mt-1 opacity-0 group-hover:opacity-100 transition">
+          Confidentiality agreement required before full access
+        </p>
+      </div>
+    </div>
+
+    {/* CARD 3 */}
+    <div className="relative group h-[220px] rounded-lg overflow-hidden shadow">
+      <img
+        src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
+        alt="Approval"
+        className="absolute w-full h-full object-cover"
+      />
+
+      <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition" />
+
+      <div className="relative z-10 h-full flex flex-col justify-end p-4 text-left">
+        <h3 className="text-white text-lg font-semibold">
+          Controlled Approval
+        </h3>
+        <p className="text-white/80 text-sm mt-1 opacity-0 group-hover:opacity-100 transition">
+          Access granted based on governance and platform rules
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  {/* FOOTER NOTE */}
+  <div className="max-w-[800px] mx-auto text-center mt-10">
+    <p className="text-sm text-landvista-muted">
+      The platform is not publicly accessible and is designed for institutional participants only
+    </p>
+  </div>
+</section>
 
       {/* ================= FORM ================= */}
       <section className="pb-20 px-6 md:px-10">
@@ -170,7 +235,7 @@ export default function AdvisoryPage() {
 
             {/* SUBMIT */}
             <div className="md:col-span-2 mt-4">
-              <button className="w-full bg-landvista-green text-white py-4 font-medium hover:opacity-90">
+              <button className="w-full bg-landvista-blue text-white py-4 font-medium hover:opacity-90">
                 Submit Request
               </button>
             </div>

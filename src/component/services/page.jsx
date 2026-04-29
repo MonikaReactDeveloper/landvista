@@ -4,12 +4,14 @@ import { services } from "../../data/services";
 import ServiceHero from "./serviceHero";
 import Navbar from "../homePage/navbar";
 import Footer from "../homePage/footer";
+import Breadcrumbs from "../homePage/Breadcrumbs";
 
 export default function ServicesPage() 
 {
     const navigate = useNavigate();
   return (<>
   <Navbar/>
+  <Breadcrumbs/>
     <section className="bg-landvista-bg mb-10">
        
       <div className="max-w-[1440px] mx-auto px-6 md:px-10">

@@ -11,44 +11,55 @@ import {
 } from "lucide-react";
 
 export default function AdminDashboard() {
-  const stats = [
-    {
-      title: "Land Data",
-      value: "3162",
-      icon: GraduationCap,
-      color: "from-blue-400 to-cyan-400",
-    },
-    {
-      title: "Investor data",
-      value: "277",
-      icon: Video,
-      color: "from-pink-500 to-red-500",
-    },
-    {
-      title: "Blogs",
-      value: "456",
-      icon: DollarSign,
-      color: "from-green-400 to-emerald-500",
-    },
-    {
-      title: "Insights",
-      value: "61",
-      icon: BookOpen,
-      color: "from-orange-400 to-red-400",
-    },
-    {
-      title: "Active user",
-      value: "3",
-      icon: Users,
-      color: "from-rose-400 to-pink-400",
-    },
-  ];
-
   return (
-    <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-      {stats.map((item, i) => (
-        <StatCard key={i} {...item} />
-      ))}
+    <div className="space-y-6">
+
+      {/* TOP STATS */}
+      <div className="grid md:grid-cols-4 gap-6">
+        <StatCard
+          title="Pending Approvals"
+          value="12"
+          icon={Users}
+          color="from-blue-500 to-cyan-500"
+        />
+        <StatCard
+          title="Active Users"
+          value="342"
+          icon={Users}
+          color="from-green-500 to-emerald-500"
+        />
+        <StatCard
+          title="NDA Pending"
+          value="8"
+          icon={BookOpen}
+          color="from-orange-500 to-red-500"
+        />
+        <StatCard
+          title="Critical Alerts"
+          value="3"
+          icon={DollarSign}
+          color="from-red-500 to-pink-500"
+        />
+      </div>
+
+      {/* ALERTS */}
+      <div className="bg-white p-5 rounded-lg">
+        <h3 className="font-semibold mb-3">Critical Alerts</h3>
+        <p className="text-sm text-gray-600">
+          SLA breach in Pipeline • NDA expired users • Unauthorized attempts
+        </p>
+      </div>
+
+      {/* RECENT ACTIVITY */}
+      <div className="bg-white p-5 rounded-lg">
+        <h3 className="font-semibold mb-3">Recent Activity</h3>
+        <ul className="text-sm text-gray-600 space-y-2">
+          <li>User approved</li>
+          <li>NDA accepted</li>
+          <li>Document accessed</li>
+        </ul>
+      </div>
+
     </div>
   );
 }

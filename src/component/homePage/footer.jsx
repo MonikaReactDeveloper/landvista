@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-landvista-green text-white">
+    <footer className="w-full bg-landvista-bg">
 
       <div className="max-w-[1440px] mx-auto px-6 md:px-10 py-16 md:py-20">
 
@@ -13,8 +13,8 @@ export default function Footer() {
           {/* COLUMN */}
           <div>
             <h3 className="text-[14px] font-semibold mb-4">About</h3>
-            <ul className="space-y-3 text-[14px] text-gray-300">
-              <li><a href="#">Our Story</a></li>
+            <ul className="space-y-3 text-[14px] text-landvista-blue">
+              <li><a href="/about-us">Our Story</a></li>
               <li><a href="#">Leadership</a></li>
               <li><a href="#">Locations</a></li>
               <li><a href="#">Sustainability</a></li>
@@ -23,7 +23,7 @@ export default function Footer() {
 
           <div>
             <h3 className="text-[14px] font-semibold mb-4">Careers</h3>
-            <ul className="space-y-3 text-[14px] text-gray-300">
+            <ul className="space-y-3 text-[14px] text-landvista-blue">
               <li><a href="#">Open Roles</a></li>
               <li><a href="#">Culture</a></li>
               <li><a href="#">Diversity</a></li>
@@ -32,7 +32,7 @@ export default function Footer() {
 
           <div>
             <h3 className="text-[14px] font-semibold mb-4">Investor</h3>
-            <ul className="space-y-3 text-[14px] text-gray-300">
+            <ul className="space-y-3 text-[14px] text-landvista-blue">
               <li><a href="#">Reports</a></li>
               <li><a href="#">Financials</a></li>
               <li><a href="#">Governance</a></li>
@@ -41,7 +41,7 @@ export default function Footer() {
 
           <div>
             <h3 className="text-[14px] font-semibold mb-4">Newsroom</h3>
-            <ul className="space-y-3 text-[14px] text-gray-300">
+            <ul className="space-y-3 text-[14px] text-landvista-blue">
               <li><a href="#">Latest News</a></li>
               <li><a href="#">Press Releases</a></li>
               <li><a href="#">Media Kit</a></li>
@@ -50,10 +50,11 @@ export default function Footer() {
 
           <div>
             <h3 className="text-[14px] font-semibold mb-4">Services</h3>
-            <ul className="space-y-3 text-[14px] text-gray-300">
-              <li><a href="#">Advisory</a></li>
+            <ul className="space-y-3 text-[14px] text-landvista-blue">
+              <li><a href="/advisory">Advisory</a></li>
               <li><a href="#">Valuation</a></li>
               <li><a href="#">Property Management</a></li>
+              <li><a href="/admin">Admin Access</a></li>
             </ul>
           </div>
 
@@ -85,7 +86,7 @@ export default function Footer() {
 
       {/* BOTTOM BAR */}
       <div className="border-t border-white/10 py-6">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-10 flex flex-col md:flex-row justify-between items-center gap-4 text-[13px] text-gray-300">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-10 flex flex-col md:flex-row justify-between items-center gap-4 text-[13px] text-landvista-blue">
 
           {/* COPYRIGHT */}
           <p>© {new Date().getFullYear()} Landvista. All rights reserved.</p>

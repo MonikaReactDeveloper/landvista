@@ -3,7 +3,7 @@ import React from "react";
 export default function Newsletter() {
   return (
     <section className="w-full bg-landvista-bg py-16 md:py-24">
-      <div className="max-w-[1440px] mx-auto px-6 md:px-10">
+      <div className="max-w-6xl mx-auto px-6 md:px-10">
 
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
 
@@ -44,7 +44,7 @@ export default function Newsletter() {
               {/* BUTTON */}
               <button
               
-                className="bg-landvista-green text-white px-6 py-3 text-[14px] font-medium hover:bg-[#255e50] transition"
+                className="bg-landvista-blue text-white px-6 py-3 text-[14px] font-medium hover:bg-[#255e50] transition"
               >
                 Subscribe
               </button>

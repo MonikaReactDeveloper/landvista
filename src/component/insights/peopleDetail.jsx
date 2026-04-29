@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { team } from "../../data/team";
 import Navbar from "../homePage/navbar";
 import { Mail, MapPin, ArrowRight } from "lucide-react";
+import Breadcrumbs from "../homePage/Breadcrumbs";
 
 export default function PeopleDetail() {
   const { slug } = useParams();
@@ -18,7 +19,7 @@ export default function PeopleDetail() {
   return (
     <>
       <Navbar />
-
+<Breadcrumbs/>
       <section className="bg-landvista-bg min-h-screen">
         <div className="max-w-[1440px] mx-auto px-6 md:px-10 py-16">
 

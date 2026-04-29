@@ -1,391 +1,290 @@
-import { useState } from "react";
-import Sidebar from "./Sidebar";
-import Topbar from "./Topbar";
+import { useEffect, useState } from "react";
 
 export default function AdminUser() {
+
   const [users, setUsers] = useState([]);
-  const [showForm, setShowForm] = useState(false);
-  const [editIndex, setEditIndex] = useState(null);
-  const [search, setSearch] = useState("");
-const [roleFilter, setRoleFilter] = useState("all");
-const [verifiedFilter, setVerifiedFilter] = useState("all");
+  const [selected, setSelected] = useState([]);
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    verified: false,
-    role: "user",
-      requestedRole: "",
-    
-    founderStatus: "pending",
-    investorStatus: "pending",
-    ndaAccess: false,
-    fullAccess: false,
+  const [sessions, setSessions] = useState([]);
+  const [loginHistory, setLoginHistory] = useState([]);
+
+  const [filters, setFilters] = useState({
+    search: "",
+    role: "all",
+    status: "all",
   });
-const filteredUsers = users.filter((user) => {
-  const matchSearch =
-    user.name.toLowerCase().includes(search.toLowerCase()) ||
-    user.email.toLowerCase().includes(search.toLowerCase());
 
-  const matchRole =
-    roleFilter === "all" || user.role === roleFilter;
+  // LOAD
+  useEffect(() => {
+    setUsers(JSON.parse(localStorage.getItem("users")) || []);
+    setSessions(JSON.parse(localStorage.getItem("sessions")) || []);
+    setLoginHistory(JSON.parse(localStorage.getItem("loginHistory")) || []);
+  }, []);
 
-  const matchVerified =
-    verifiedFilter === "all" ||
-    (verifiedFilter === "verified" && user.verified) ||
-    (verifiedFilter === "not-verified" && !user.verified);
-
-  return matchSearch && matchRole && matchVerified;
-});
-  // handle input
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
+  // SAVE
+  const persistUsers = (data) => {
+    setUsers(data);
+    localStorage.setItem("users", JSON.stringify(data));
   };
-const handleApproveRequest = (index) => {
-  const updated = [...users];
-  const user = updated[index];
 
-  // assign role
-  user.role = user.requestedRole;
+  // ================= BULK ACTIONS =================
 
-  // update status
-  if (user.requestedRole === "founder") {
-    user.founderStatus = "approved";
-  }
-  if (user.requestedRole === "investor") {
-    user.investorStatus = "approved";
-  }
+  const bulkUpdate = (status) => {
+    const updated = users.map((u, i) =>
+      selected.includes(i) ? { ...u, status } : u
+    );
 
-  user.requestedRole = ""; // clear request
+    persistUsers(updated);
+    setSelected([]);
+  };
 
-  setUsers(updated);
+  // ================= STATUS =================
+
+  const updateUser = (index, updates) => {
+    const updated = [...users];
+    updated[index] = { ...updated[index], ...updates };
+    persistUsers(updated);
+  };
+
+const handleApprove = (i) => {
+  const user = users[i];
+
+  const selectedRole = prompt(
+    `Requested: ${user.requestedRole}\nAssign role (admin/user/investor/founder):`,
+    user.requestedRole || "user"
+  );
+
+  updateUser(i, {
+    status: "approved",
+    role: selectedRole || user.requestedRole || "user",
+    approved_by: "admin",
+    approved_at: new Date().toISOString(),
+  });
 };
 
-const handleRejectRequest = (index) => {
-  const updated = [...users];
-  const user = updated[index];
-
-  if (user.requestedRole === "founder") {
-    user.founderStatus = "rejected";
-  }
-  if (user.requestedRole === "investor") {
-    user.investorStatus = "rejected";
-  }
-
-  user.requestedRole = ""; // clear request
-
-  setUsers(updated);
-};
-  // submit
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (editIndex !== null) {
-      const updated = [...users];
-      updated[editIndex] = formData;
-      setUsers(updated);
-      setEditIndex(null);
-    } else {
-      setUsers([...users, formData]);
-    }
-
-    resetForm();
-  };
-
-  // edit
-  const handleEdit = (index) => {
-    setFormData(users[index]);
-    setEditIndex(index);
-    setShowForm(true);
-  };
-
-  // delete
-  const handleDelete = (index) => {
-    const updated = users.filter((_, i) => i !== index);
-    setUsers(updated);
-  };
-
-  // reset
-  const resetForm = () => {
-    setFormData({
-      name: "",
-      email: "",
-      password: "",
-      verified: false,
-      role: "user",
-      founderStatus: "pending",
-      investorStatus: "pending",
-      ndaAccess: false,
-      fullAccess: false,
+  const handleReject = (i) => {
+    const reason = prompt("Rejection reason");
+    updateUser(i, {
+      status: "rejected",
+      rejection_reason: reason || "",
     });
-    setShowForm(false);
   };
 
-  return (<>
-      <div className="flex h-screen bg-gray-100">
-                  
-                  <Sidebar />
-            
-                  <div className="flex-1 flex flex-col">
-                    <Topbar />
-    <div className="p-4 md:p-6">
-    
-      {/* HEADER */}
-      <div className="flex flex-col md:flex-row justify-between gap-3 mb-4">
-        <h2 className="text-xl font-semibold">Users</h2>
+  const handleSuspend = (i) => {
+    const reason = prompt("Suspension reason");
+    updateUser(i, {
+      status: "suspended",
+      suspension_reason: reason || "",
+    });
+  };
 
-        <button
-          onClick={() => setShowForm(true)}
-          className="bg-blue-600 text-white px-4 py-2 rounded w-full md:w-auto"
-        >
-          Add User
+  const handleReactivate = (i) => {
+    updateUser(i, {
+      status: "approved",
+      suspension_reason: "",
+    });
+  };
+
+  // ================= SESSION CONTROL =================
+
+  const forceLogout = (userId) => {
+    const updatedSessions = sessions.filter(s => s.user_id !== userId);
+    setSessions(updatedSessions);
+    localStorage.setItem("sessions", JSON.stringify(updatedSessions));
+  };
+
+  // ================= FILTER =================
+
+  const filtered = users.filter(u => {
+    return (
+      (filters.role === "all" || u.role === filters.role) &&
+      (filters.status === "all" || u.status === filters.status) &&
+      (
+        u.full_name?.toLowerCase().includes(filters.search.toLowerCase()) ||
+        u.email?.toLowerCase().includes(filters.search.toLowerCase())
+      )
+    );
+  });
+
+  // ================= UI =================
+
+  return (
+    <div className="p-6 bg-gray-50 min-h-screen space-y-6">
+
+      <h2 className="text-xl font-semibold">User Control</h2>
+
+      {/* FILTERS */}
+      <div className="grid md:grid-cols-4 gap-3 bg-white p-4 rounded-xl">
+        <input
+          placeholder="Search..."
+          className="input"
+          onChange={(e)=>setFilters({...filters, search:e.target.value})}
+        />
+
+        <select className="input"
+          onChange={(e)=>setFilters({...filters, role:e.target.value})}>
+          <option value="all">All Roles</option>
+          <option>admin</option>
+          <option>user</option>
+          <option>investor</option>
+        </select>
+
+        <select className="input"
+          onChange={(e)=>setFilters({...filters, status:e.target.value})}>
+          <option value="all">All Status</option>
+          <option>pending</option>
+          <option>approved</option>
+          <option>rejected</option>
+          <option>suspended</option>
+        </select>
+
+        <button onClick={()=>setFilters({search:"",role:"all",status:"all"})}
+          className="btn-secondary">
+          Reset
         </button>
       </div>
-<div className="flex flex-col md:flex-row gap-3 mb-4">
-  <input
-    placeholder="Search name or email..."
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-    className="border p-2 rounded w-full md:w-1/3"
-  />
 
-  <select
-    value={roleFilter}
-    onChange={(e) => setRoleFilter(e.target.value)}
-    className="border p-2 rounded"
-  >
-    <option value="all">All Roles</option>
-    <option value="admin">Admin</option>
-    <option value="user">User</option>
-    <option value="founder">Founder</option>
-    <option value="investor">Investor</option>
-  </select>
-
-  <select
-    value={verifiedFilter}
-    onChange={(e) => setVerifiedFilter(e.target.value)}
-    className="border p-2 rounded"
-  >
-    <option value="all">All</option>
-    <option value="verified">Verified</option>
-    <option value="not-verified">Not Verified</option>
-  </select>
-</div>
-      {/* FORM */}
-      {showForm && (
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white p-4 rounded shadow mb-6 grid gap-3 md:grid-cols-2"
-        >
-          <input
-            name="name"
-            placeholder="Name"
-            value={formData.name}
-            onChange={handleChange}
-            className="border p-2 rounded"
-            required
-          />
-
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            className="border p-2 rounded"
-            required
-          />
-
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            className="border p-2 rounded"
-            required
-          />
-
-          <select
-            name="role"
-            value={formData.role}
-            onChange={handleChange}
-            className="border p-2 rounded"
-          >
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-            <option value="founder">Founder</option>
-            <option value="investor">Investor</option>
-          </select>
-<select
-  name="requestedRole"
-  value={formData.requestedRole}
-  onChange={handleChange}
-  className="border p-2 rounded"
->
-  <option value="">No Request</option>
-  <option value="founder">Request Founder</option>
-  <option value="investor">Request Investor</option>
-  <option value="admin">Request Admin</option>
-</select>
-          {/* STATUS CONTROLS */}
-          <select
-            name="founderStatus"
-            value={formData.founderStatus}
-            onChange={handleChange}
-            className="border p-2 rounded"
-          >
-            <option value="pending">Founder Pending</option>
-            <option value="approved">Founder Approved</option>
-            <option value="rejected">Founder Rejected</option>
-          </select>
-
-          <select
-            name="investorStatus"
-            value={formData.investorStatus}
-            onChange={handleChange}
-            className="border p-2 rounded"
-          >
-            <option value="pending">Investor Pending</option>
-            <option value="approved">Investor Approved</option>
-            <option value="rejected">Investor Rejected</option>
-          </select>
-
-          {/* CHECKBOXES */}
-          <label className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              name="verified"
-              checked={formData.verified}
-              onChange={handleChange}
-            />
-            Verified
-          </label>
-
-          <label className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              name="ndaAccess"
-              checked={formData.ndaAccess}
-              onChange={handleChange}
-            />
-            NDA Access
-          </label>
-
-          <label className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              name="fullAccess"
-              checked={formData.fullAccess}
-              onChange={handleChange}
-            />
-            Full Access
-          </label>
-
-          {/* ACTIONS */}
-          <div className="col-span-2 flex gap-2">
-            <button className="bg-green-600 text-white px-4 py-2 rounded">
-              {editIndex !== null ? "Update" : "Submit"}
-            </button>
-
-            <button
-              type="button"
-              onClick={resetForm}
-              className="bg-gray-400 text-white px-4 py-2 rounded"
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
+      {/* BULK ACTIONS */}
+      {selected.length > 0 && (
+        <div className="bg-white p-3 rounded flex gap-3 text-sm">
+          <span>{selected.length} selected</span>
+          <button onClick={()=>bulkUpdate("approved")}>Approve</button>
+          <button onClick={()=>bulkUpdate("rejected")}>Reject</button>
+        </div>
       )}
 
-      {/* USER LIST */}
-   <div className="overflow-x-auto">
-  <table className="min-w-full bg-white rounded shadow">
-    <thead className="bg-gray-200 text-sm">
-      <tr>
-        <th className="p-3 text-left">Name</th>
-        <th className="p-3 text-left">Email</th>
-        <th className="p-3">Role</th>
-        <th className="p-3">Verified</th>
-        <th className="p-3">Access</th>
-        <th className="p-3">Request</th>
-        <th className="p-3">Actions</th>
-        
-      </tr>
-    </thead>
+      {/* TABLE */}
+      <div className="bg-white rounded-xl overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead className="bg-gray-100">
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Role</th>
+              <th>Tier</th>
+              <th>Requested Role</th>
+              <th>Sessions</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
 
-    <tbody>
-      {filteredUsers.map((user, index) => (
-        <tr key={index} className="border-t text-sm">
-          <td className="p-3">{user.name}</td>
-          <td className="p-3">{user.email}</td>
-          <td className="p-3 text-center">{user.role}</td>
+          <tbody>
+            {filtered.map((u, i) => {
 
-          <td className="p-3 text-center">
-            {user.verified ? "✅" : "❌"}
-          </td>
+              const activeSessions = sessions.filter(s => s.user_id === u.email);
 
-          <td className="p-3 text-center">
-            NDA: {user.ndaAccess ? "✔" : "✖"} <br />
-            Full: {user.fullAccess ? "✔" : "✖"}
-          </td>
-<td className="p-3 text-center">
-  {user.requestedRole ? (
-    <div className="flex flex-col items-center gap-1">
-      <span className="text-xs text-blue-600 font-medium">
-        {user.requestedRole} requested
-      </span>
+              return (
+                <tr key={i} className="border-t">
 
-      <div className="flex gap-1">
-        <button
-          onClick={() => handleApproveRequest(index)}
-          className="bg-green-600 text-white px-2 py-1 rounded text-xs"
-        >
-          Approve
-        </button>
+                  {/* SELECT */}
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={selected.includes(i)}
+                      onChange={(e)=>{
+                        setSelected(prev =>
+                          e.target.checked
+                            ? [...prev, i]
+                            : prev.filter(id => id !== i)
+                        )
+                      }}
+                    />
+                  </td>
 
-        <button
-          onClick={() => handleRejectRequest(index)}
-          className="bg-red-600 text-white px-2 py-1 rounded text-xs"
-        >
-          Reject
-        </button>
-      </div>
-    </div>
-  ) : (
-    <span className="text-gray-400 text-xs">No Request</span>
-  )}
+                  <td>{u.full_name}</td>
+                  <td>{u.email}</td>
+
+                  {/* STATUS */}
+                  <td>{u.status}</td>
+
+                  {/* ROLE */}
+                  <td>
+                    <select
+                      value={u.role}
+                      onChange={(e)=>updateUser(i,{role:e.target.value})}
+                      className="input text-xs"
+                    >
+                      <option>user</option>
+                      <option>admin</option>
+                      <option>investor</option>
+                      <option>founder</option>
+                    </select>
+                  </td>
+
+                  {/* TIER */}
+                  <td>
+                    <select
+                      value={u.tier}
+                      onChange={(e)=>updateUser(i,{tier:e.target.value})}
+                      className="input text-xs"
+                    >
+                      <option>preview</option>
+                      <option>intelligence</option>
+                      <option>mandate</option>
+                    </select>
+                  </td>
+<td>
+  {u.requestedRole ? (
+    <span className="bg-yellow-100 text-yellow-700 px-2 py-1 text-xs rounded">
+      {u.requestedRole}
+    </span>
+  ) : "-"}
 </td>
-          <td className="p-3 flex gap-2 justify-center">
-            <button
-              onClick={() => handleEdit(index)}
-              className="bg-yellow-500 text-white px-2 py-1 rounded"
-            >
-              Edit
-            </button>
+                  {/* SESSIONS */}
+                  <td>
+                    {activeSessions.length}
+                    {activeSessions.length > 0 && (
+                      <button
+                        onClick={()=>forceLogout(u.email)}
+                        className="text-xs text-red-500 ml-2"
+                      >
+                        Logout
+                      </button>
+                    )}
+                  </td>
 
-            <button
-              onClick={() => handleDelete(index)}
-              className="bg-red-600 text-white px-2 py-1 rounded"
-            >
-              Delete
-            </button>
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
+                  {/* ACTIONS */}
+                  <td className="flex gap-2 text-xs">
 
+                    {u.status === "pending" && (
+                      <>
+                        <button onClick={()=>handleApprove(i)}>Approve</button>
+                        <button onClick={()=>handleReject(i)}>Reject</button>
+                      </>
+                    )}
+
+                    {u.status === "approved" && (
+                      <button onClick={()=>handleSuspend(i)}>Suspend</button>
+                    )}
+
+                    {u.status === "suspended" && (
+                      <button onClick={()=>handleReactivate(i)}>Reactivate</button>
+                    )}
+
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
+
+      {/* LOGIN HISTORY */}
+      <div className="bg-white p-4 rounded-xl">
+        <h3 className="font-medium mb-3">Login History</h3>
+
+        {loginHistory.map((l, i)=>(
+          <div key={i} className="text-xs border-b py-2 flex justify-between">
+            <span>{l.user}</span>
+            <span>{l.ip}</span>
+            <span>{l.device}</span>
+            <span>{l.time}</span>
+          </div>
+        ))}
+      </div>
+
     </div>
-    </div>
-    </div>
- </> );
+  );
 }

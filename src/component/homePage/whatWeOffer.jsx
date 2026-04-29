@@ -3,7 +3,7 @@
 export default function WhatWeOffer() {
   return (
     <section className="w-full bg-[#F7F8FA]">
-      <div className="max-w-[1440px] mx-auto px-6 md:px-10 py-16 md:py-24">
+      <div className="max-w-6xl mx-auto px-6 md:px-10 py-16 md:py-24">
 
         {/* GRID */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-y-16 md:gap-y-24">
@@ -29,7 +29,7 @@ export default function WhatWeOffer() {
 
             {/* MAIN TEXT */}
             <div className="md:col-span-7">
-              <h3 className="text-[28px] md:text-[40px] leading-tight font-serif text-landvista-charcoal">
+              <h3 className="text-[24px] md:text-[30px] leading-tight font-serif text-landvista-charcoal">
                Strategic land intelligence and structuring support
               </h3>
             </div>
@@ -60,7 +60,7 @@ export default function WhatWeOffer() {
 
             {/* MAIN TEXT */}
             <div className="md:col-span-7">
-              <h3 className="text-[28px] md:text-[40px] leading-tight font-serif text-landvista-charcoal">
+              <h3 className="text-[20px] md:text-[30px] leading-tight font-serif text-landvista-charcoal">
               Regulatory mapping and development frameworks
               </h3>
             </div>
@@ -91,7 +91,7 @@ export default function WhatWeOffer() {
 
             {/* MAIN TEXT */}
             <div className="md:col-span-7">
-              <h3 className="text-[28px] md:text-[40px] leading-tight font-serif text-landvista-charcoal">
+              <h3 className="text-[24px] md:text-[30px] leading-tight font-serif text-landvista-charcoal">
               Signal-based insights with structured validation
               </h3>
             </div>

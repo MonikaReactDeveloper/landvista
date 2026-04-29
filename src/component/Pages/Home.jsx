@@ -13,8 +13,9 @@ const Home = () => {
     <>
     <Navbar/>
     <Hero/>
+      <TrustStrip/>
     <WhatWeOffer/>
-    <TrustStrip/>
+  
     <InsightsSection/>
       <Newsletter/>
     <OurCommitment/>

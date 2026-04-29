@@ -76,8 +76,8 @@ export default function InsightsListPage() {
   });
 
   return (
-    <div className="bg-landvista-bg py-10">
-      <div className="max-w-[1440px] mx-auto px-6 md:px-10 grid grid-cols-12 gap-8">
+    <div className="bg-landvista">
+      <div className="max-w-6xl mx-auto px-6 md:px-10 grid grid-cols-12 gap-8">
 
         {/* ================= LEFT FILTER ================= */}
         <div className="col-span-12 md:col-span-3">

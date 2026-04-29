@@ -75,18 +75,13 @@ const addCapability = () => {
   };
 
   return (
-    <> <div className="flex h-screen bg-gray-100">
-          
-          <Sidebar />
-    
-          <div className="flex-1 flex flex-col">
-            <Topbar />
+    <> 
     <div className="p-6">
       <div className="flex justify-between mb-4">
         <h2 className="text-xl font-semibold">Services</h2>
         <button
           onClick={() => setShowForm(true)}
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          className="bg-landvista-blue text-white px-4 py-2 rounded"
         >
           Add Service
         </button>
@@ -165,7 +160,7 @@ const addCapability = () => {
         <button
           type="button"
           onClick={() => deleteCapability(index)}
-          className="bg-red-500 text-white px-3 py-1 rounded"
+          className="bg-landvista-blue text-white px-3 py-1 rounded"
         >
           Delete Capability
         </button>
@@ -175,15 +170,15 @@ const addCapability = () => {
     <button
       type="button"
       onClick={addCapability}
-      className="bg-blue-500 text-white px-4 py-2 rounded"
-    >
+      className="bg-landvista-blue text-white px-4 py-2 rounded"
+    > 
       Add Capability
     </button>
   </div>
 
   {/* ACTION BUTTONS */}
   <div className="flex gap-2">
-    <button className="bg-green-600 text-white px-4 py-2 rounded">
+    <button className="bg-landvista-blue text-white px-4 py-2 rounded">
       {editIndex !== null ? "Update" : "Submit"}
     </button>
 
@@ -193,7 +188,7 @@ const addCapability = () => {
         setShowForm(false);
         setEditIndex(null);
       }}
-      className="bg-gray-400 text-white px-4 py-2 rounded"
+      className="bg-landvista-blue text-white px-4 py-2 rounded"
     >
       Cancel
     </button>
@@ -227,14 +222,14 @@ const addCapability = () => {
             <div className="flex gap-2">
               <button
                 onClick={() => handleEdit(index)}
-                className="bg-yellow-500 text-white px-3 py-1 rounded"
+                className="bg-landvista-blue text-white px-3 py-1 rounded"
               >
                 Edit
               </button>
 
               <button
                 onClick={() => handleDelete(index)}
-                className="bg-red-600 text-white px-3 py-1 rounded"
+                className="bg-landvista-blue text-white px-3 py-1 rounded"
               >
                 Delete
               </button>
@@ -242,8 +237,7 @@ const addCapability = () => {
           </div>
         ))}
       </div>
-    </div>
-    </div>
+    
     </div>
     </>
   );

@@ -3,6 +3,7 @@ import React from "react";
 import Sidebar from "./Component/Sidebar";
 import Topbar from "./Component/Topbar";
 import AdminDashboard from "./AdminDashboard";
+import { Outlet } from "react-router-dom";
 
 
 export default function AdminLayout() {
@@ -15,7 +16,8 @@ export default function AdminLayout() {
         <Topbar />
 
         <div className="p-6 overflow-y-auto">
-          <AdminDashboard />
+          {/* <AdminDashboard/> */}
+          <Outlet/>
         </div>
       </div>
 

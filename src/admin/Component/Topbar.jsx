@@ -3,7 +3,7 @@ import { Search, Bell } from "lucide-react";
 
 export default function Topbar() {
   return (
-    <div className="h-[70px] bg-gradient-to-r from-[#0f6d8c] to-[#1fa2c9] px-6 flex items-center justify-between text-white">
+    <div className="h-[70px] bg-landvista-blue px-6 flex items-center justify-between text-white">
 
       <div className="flex items-center gap-4 w-full max-w-md bg-white/20 px-4 py-2 rounded">
         <Search size={18} />

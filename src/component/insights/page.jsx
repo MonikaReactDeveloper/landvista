@@ -10,6 +10,7 @@ import InsightsSection from "../homePage/insights";
 import Footer from "../homePage/footer";
 import Newsletter from "../homePage/newsLetter";
 import InsightsListPage from "./insightListPage";
+import Breadcrumbs from "../homePage/Breadcrumbs";
 
 const tabs = [
   { name: "Overview", id: "overview" },
@@ -58,10 +59,11 @@ const renderContent = () => {
 };
   return (<>
     <Navbar/>
+    <Breadcrumbs/>
     <div className="w-full">
 
       {/* ================= HERO ================= */}
-      <section className="bg-landvista-green text-white">
+      <section className="bg-landvista-bg">
         <div className="max-w-[1440px] mx-auto px-6 md:px-10 py-10">
 
           {/* TOP ROW */}
@@ -105,8 +107,8 @@ const renderContent = () => {
     onClick={() => handleTabClick(tab.id)}
     className={`pb-3 text-sm ${
       activeTab === tab.id
-        ? "text-white border-b-2 border-green-400"
-        : "text-white/60"
+        ? "text-landvista-blue text-bold border-b-2 border-green-400"
+        : "text-landvista-muted hover:text-landvista-blue transition"
     }`}
   >
     {tab.name}
@@ -119,7 +121,7 @@ const renderContent = () => {
 
       {/* ================= CONTENT ================= */}
 <section className="bg-landvista-bg py-16 md:py-24">
-  <div className="max-w-[1440px] mx-auto px-6 md:px-10">
+  <div className="max-w-6xl mx-auto px-6 md:px-10">
 
     {window.location.hash ? (
       renderContent()

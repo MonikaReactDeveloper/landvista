@@ -32,28 +32,34 @@ useEffect(() => {
       viewAll: "View All Services",
       sections: [
         {
-          title: "Needs",
-          links: [
-            "Invest, Sell & Finances",
-            "Plan, Lease & Occupy",
-            "Design & Build",
-            "Manage Properties & Portfolios",
-            "Transform Business Outcomes",
-          ],
-        },
+  title: "Needs",
+  links: [
+    { name: "Invest, Sell & Finances", slug: "invest-sell-and-finance" },
+    { name: "Plan, Lease & Occupy", slug: "plan-lease-occupy" },
+    { name: "Design & Build", slug: "design-build" },
+    { name: "Manage Properties & Portfolios", slug: "manage-properties" },
+    { name: "Transform Business Outcomes", slug: "transform-outcomes" },
+  ],
+},
         
         {
           title: "Property Types",
-          links: ["Office", "Retail", "Industrial", "Multifamily", "Hotels"],
+          links: [
+            { name: "Office", slug: "office" },
+            { name: "Retail", slug: "retail" },
+            { name: "Industrial", slug: "industrial" },
+            { name: "Multifamily", slug: "multifamily" },
+            { name: "Hotels", slug: "hotels" }
+          ],
         },
         {
           title: "Industries",
           links: [
-            "Data Center",
-            "Life Sciences",
-            "Banking & Financial Services",
-            "Tech, Media & Telecommunications",
-            "Healthcare",
+            { name: "Data Center", slug: "data-center" },
+            { name: "Life Sciences", slug: "life-sciences" },
+            { name: "Banking & Financial Services", slug: "banking-financial-services" },
+          
+            { name: "Healthcare", slug: "healthcare" }
           ],
         },
       ],
@@ -64,32 +70,102 @@ useEffect(() => {
       cta: "Explore Insights & Research",
        slug: "insights",
         sections: [
-        {
-          title: "Latest Research",
-          links: [
-            "Market Reports",
-           
-          ],
-        },
+       {
+  title: "Latest Research",
+  links: [
+    { name: "Market Reports", slug: "market-reports" }
+  ]
+},
         
         {
           title: "Trending Topics",
-          links: ["The Weekly Take Podcast", "Our Take Newsletter", "Sustainability", "Total Cost Of Occupancy", "Data Center"],
+          links: [
+    { name: "Intelligent Investments", slug: "intelligent-investments" },
+    { name: "Future Cities", slug: "future-cities" },
+    { name: "Adaptive Spaces", slug: "adaptive-spaces" },
+    { name: "Evolving Workspaces", slug: "evolving-workspaces" },
+    { name: "Creating Resillience", slug: "creating-resillience" },
+  ],
         },
         {
           title: "Featured Insights",
-          links: [
-            "Intelligent Investments",
-            "Future Cities",
-            "Adaptive Spaces",
-            "Evolving Workforces",
-            "Creating Resillience",
+          links: [{ name: "The Weekly Take Podcast", slug: "the-weekly-take-podcast" },
+          { name: "Our Take Newsletter", slug: "our-take-newsletter" },
+          { name: "Sustainability", slug: "sustainability" },
+            { name: "Intelligent Investments", slug: "intelligent-investments" },
+            { name: "Future Cities", slug: "future-cities" },
+            { name: "Adaptive Spaces", slug: "adaptive-spaces" },
+            { name: "Evolving Workspaces", slug: "evolving-workspaces" },
+            { name: "Creating Resillience", slug: "creating-resillience" },
           ],
         },
       ],
      },
-    { name: "Governance" },
-    { name: "Policy & Zones" },
+     {
+      name: "Governance",
+      description:"TerraSignal operates under structured governance systems designed to ensure transparency, data integrity, and disciplined decision-making",
+      cta: "View Governance Framework",
+        slug: "governance",
+      viewAll: "View All Services",
+      sections: [
+        {
+          title: "Principles",
+          links: [{ name: "Non-Brokerage Model", slug: "non-brokerage-model" },
+          { name: "Policy-Aligned Intelligence", slug: "policy-aligned-intelligence" },
+          { name: "No Speculative Outputs", slug: "no-speculative-outputs" },
+            { name: "Controlled Access Only", slug: "controlled-access-only" },
+          
+          ],
+        },
+        
+        {
+          title: "Property Types",
+          links: [
+            { name: "Office", slug: "office" },
+            { name: "Retail", slug: "retail" },
+            { name: "Industrial", slug: "industrial" },
+            { name: "Multifamily", slug: "multifamily" },
+            { name: "Hotels", slug: "hotels" }
+          ],
+        },
+   
+      ],
+    },
+     {
+      name: "Policy & Zones",
+      description:"Explore zones, sectors, and regulatory frameworks through structured intelligence and verified data layers",
+      cta: "View Policy & Zones",
+        slug: "policy-zones",
+      viewAll: "View Policy",
+      sections: [
+        {
+          title: "Zones",
+          links: [{ name: "Zone A", slug: "zone-a" },
+          { name: "Zone B", slug: "zone-b" },
+          { name: "Zone C", slug: "zone-c" },
+            { name: "Zone L", slug: "zone-l" },
+            { name: "Zone N", slug: "zone-n" },
+            { name: "Future Zones", slug: "future-zones" },
+  
+         
+          ],
+        },
+        
+        {
+          title: "Property Types",
+          links: [
+            { name: "Office", slug: "office" },
+            { name: "Retail", slug: "retail" },
+            { name: "Industrial", slug: "industrial" },
+            { name: "Multifamily", slug: "multifamily" },
+            { name: "Hotels", slug: "hotels" }
+          ],
+        },
+   
+      ],
+    },
+   
+  
     { name: "Careers" },
      { name: "Advisory",
       description:"TerraSignal provides structured advisory services derived from policy-aligned intelligence, verified data inputs, and disciplined decision frameworks."
@@ -100,22 +176,25 @@ useEffect(() => {
       {
         title:"Land Strategy Advisory",
         links:[
-          "Intelligent Investments",
-          "Future Cities"]
+          { name: "Intelligent Investments", slug: "intelligent-investments" },
+          { name: "Future Cities", slug: "future-cities" }
+        ]
       },
         {
         title:"Opportunity Structuring",
         links:[
-          "Align Land",
-          "Capital",
-        "Development Strategy"]
+          { name: "Align Land", slug: "align-land" },
+          { name: "Capital", slug: "capital" },
+          { name: "Development Strategy", slug: "development-strategy" }
+        ]
       },
       {
         title:"Risk Assessment",
         links:[
-          "Identify Risk",
-          "Mitigate Risk",
-        "Quantify Risk"]
+          { name: "Identify Risk", slug: "identify-risk" },
+          { name: "Mitigate Risk", slug: "mitigate-risk" },
+          { name: "Quantify Risk", slug: "quantify-risk" }
+        ]
       }
     ]},
      { name: "About Us",
@@ -127,23 +206,29 @@ useEffect(() => {
         {
           title: "Policy & Zones",
           links: [
-            "Our Policy",
+            { name: "Our Policy", slug: "our-policy" },
            
           ],
         },
         
         {
           title: "Intelligence Engine",
-          links: ["The Weekly Take Podcast", "Our Take Newsletter", "Sustainability", "Total Cost Of Occupancy", "Data Center"],
+          links: [
+            { name: "The Weekly Take Podcast", slug: "the-weekly-take-podcast" },
+            { name: "Our Take Newsletter", slug: "our-take-newsletter" },
+            { name: "Sustainability", slug: "sustainability" },
+            { name: "Total Cost Of Occupancy", slug: "total-cost-of-occupancy" },
+            { name: "Data Center", slug: "data-center" }
+          ],
         },
         {
           title: "Advisory Framework",
           links: [
-            "Intelligent Investments",
-            "Future Cities",
-            "Adaptive Spaces",
-            "Evolving Workforces",
-            "Creating Resillience",
+            { name: "Intelligent Investments", slug: "intelligent-investments" },
+            { name: "Future Cities", slug: "future-cities" },
+            { name: "Adaptive Spaces", slug: "adaptive-spaces" },
+            { name: "Evolving Workforces", slug: "evolving-workforces" },
+            { name: "Creating Resillience", slug: "creating-resillience" },
           ],
         },
         
@@ -235,7 +320,7 @@ useEffect(() => {
 
         <button
   onClick={() => navigate(`/${menu[active].slug}`)}
-  className="bg-landvista-green text-white px-6 py-[14px] text-[14px] font-medium hover:bg-[#002F27] transition"
+  className="bg-landvista-blue text-white px-6 py-[14px] text-[14px] font-medium hover:bg-[#002F27] transition"
 >
   {menu[active].cta}
 </button>
@@ -253,18 +338,24 @@ useEffect(() => {
 
                 <ul className="space-y-4">
                   {section.links.map((link, j) => (
-                    <li key={j}>
-                      <a className="flex items-center justify-between text-[15px] text-[#1C1C1C] group hover:text-[#003A2F]">
+  <li key={j}>
+    <button
+      onClick={() =>
+        navigate(`/${menu[active].slug}/${link.slug}`)
+      }
+      className="w-full flex items-center justify-between text-[15px] text-[#1C1C1C] group hover:text-[#003A2F]"
+    >
+      {link.name}
 
-                        {link}
-
-                        <ChevronRight
-                          size={14}
-                          className="opacity-0 translate-x-[-4px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200"
-                        />
-                      </a>
-                    </li>
-                  ))}
+      <ChevronRight
+        size={14}
+        className="opacity-0 translate-x-[-4px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200"
+      />
+    </button>
+  </li>
+))}
+                      
+                
                 </ul>
               </div>
             ))}

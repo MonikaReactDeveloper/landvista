@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function ServiceHero() {
   return (
-    <section className="w-full bg-landvista-green overflow-hidden mb-10">
+    <section className="w-full bg-landvista-bg overflow-hidden mb-10">
       <div className="max-w-[1440px] mx-auto px-6 md:px-10 py-14 md:py-24">
 
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
@@ -37,7 +37,7 @@ export default function ServiceHero() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-[12px] md:text-[13px] uppercase tracking-[0.14em] text-white/70 mb-4"
+              className="text-[12px] md:text-[13px] uppercase tracking-[0.14em]  mb-4"
             >
               2026 Investor Services
             </motion.p>
@@ -48,7 +48,7 @@ export default function ServiceHero() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-[30px] md:text-[40px] lg:text-[48px] leading-tight font-semibold text-white mb-6"
+              className="text-[30px] md:text-[40px] lg:text-[48px] leading-tight font-semibold mb-6"
             >
               Unlock the value in every dimension of your real estate
             </motion.h1>
@@ -59,7 +59,7 @@ export default function ServiceHero() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-[15px] md:text-[17px] text-white/80 leading-relaxed mb-8"
+              className="text-[15px] md:text-[17px] leading-relaxed mb-8"
             >
               Using deep insights and global expertise, we create real estate
               strategies that drive superior business outcomes.
@@ -71,7 +71,7 @@ export default function ServiceHero() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="group inline-flex items-center gap-2 text-white font-medium text-[15px] border-b border-white pb-1 hover:gap-3 transition-all duration-300"
+              className="group inline-flex items-center gap-2 text-landvista-blue font-medium text-[15px] border-b border-white pb-1 hover:gap-3 transition-all duration-300"
             >
               Read More
 
