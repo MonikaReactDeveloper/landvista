@@ -1,51 +1,114 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { services } from "../../data/services";
+// import React from "react";
+// import { Link, useNavigate } from "react-router-dom";
+// import { services } from "../../data/services";
+// import ServiceHero from "./serviceHero";
+// import Navbar from "../homePage/navbar";
+// import Footer from "../homePage/footer";
+// import Breadcrumbs from "../homePage/Breadcrumbs";
+
+// export default function ServicesPage() 
+// {
+//     const navigate = useNavigate();
+//   return (<>
+//   <Navbar/>
+//   <Breadcrumbs/>
+//     <section className="bg-landvista-bg mb-10">
+       
+//       <div className="max-w-[1440px] mx-auto px-6 md:px-10">
+
+// <ServiceHero/>
+//         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+//          {services.map((service) => (
+//   <div
+//     key={service.slug}
+//     className="bg-white p-6 border border-gray-200 hover:shadow-md transition flex flex-col justify-between"
+//   >
+//     <div>
+//       <h3 className="text-[20px] font-semibold mb-3">
+//         {service.title}
+//       </h3>
+
+//       <p className="text-[14px] text-landvista-grey">
+//         {service.description}
+//       </p>
+//     </div>
+
+//     <button
+//       onClick={() => navigate(`/services/${service.slug}`)}
+//       className="mt-6 text-landvista-green font-medium text-sm align-left hover:underline"
+//     >
+//       Explore Service →
+//     </button>
+//   </div>
+// ))}
+
+//         </div>
+//       </div>
+//     </section>
+//     <Footer/>
+//   </>);
+// }
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ServiceHero from "./serviceHero";
 import Navbar from "../homePage/navbar";
 import Footer from "../homePage/footer";
 import Breadcrumbs from "../homePage/Breadcrumbs";
 
-export default function ServicesPage() 
-{
-    const navigate = useNavigate();
-  return (<>
-  <Navbar/>
-  <Breadcrumbs/>
-    <section className="bg-landvista-bg mb-10">
-       
-      <div className="max-w-[1440px] mx-auto px-6 md:px-10">
+export default function ServicesPage() {
+  const navigate = useNavigate();
+  const [services, setServices] = useState([]);
 
-<ServiceHero/>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("services")) || [];
 
-         {services.map((service) => (
-  <div
-    key={service.slug}
-    className="bg-white p-6 border border-gray-200 hover:shadow-md transition flex flex-col justify-between"
-  >
-    <div>
-      <h3 className="text-[20px] font-semibold mb-3">
-        {service.title}
-      </h3>
+    // ✅ Only approved services
+    const approved = stored.filter(s => s.status === "approved");
 
-      <p className="text-[14px] text-landvista-grey">
-        {service.description}
-      </p>
-    </div>
+    setServices(approved);
+  }, []);
 
-    <button
-      onClick={() => navigate(`/services/${service.slug}`)}
-      className="mt-6 text-landvista-green font-medium text-sm align-left hover:underline"
-    >
-      Explore Service →
-    </button>
-  </div>
-))}
+  return (
+    <>
+      <Navbar />
+      <Breadcrumbs />
+
+      <section className="bg-landvista-bg mb-10">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-10">
+
+          <ServiceHero />
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((service) => (
+              <div
+                key={service.slug}
+                className="bg-white border p-6 hover:shadow-md transition flex flex-col justify-between"
+              >
+                <div>
+                  <h3 className="text-[20px] font-semibold mb-3">
+                    {service.title}
+                  </h3>
+
+                  <p className="text-[14px] text-landvista-grey">
+                    {service.description}
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => navigate(`/services/${service.slug}`)}
+                  className="mt-6 text-landvista-green font-medium text-sm hover:underline"
+                >
+                  Explore Service →
+                </button>
+              </div>
+            ))}
+          </div>
 
         </div>
-      </div>
-    </section>
-    <Footer/>
-  </>);
+      </section>
+
+      <Footer />
+    </>
+  );
 }

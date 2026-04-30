@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { insights } from "../../data/insight";
+import React, { useEffect, useState } from "react";
+// import { insights } from "../../data/insight";
 import FilterSidebar from "./filterSidebar";
 
 function FilterSection({ title, options, onChange }) {
+  
   const [filters, setFilters] = useState({
   propertyType: [],
   region: [],
@@ -42,6 +43,13 @@ function handleFilter(type, value, filters, setFilters) {
 }
 
 export default function InsightsListPage() {
+  const [insights, setInsights] = useState([]);
+
+useEffect(() => {
+  const stored = JSON.parse(localStorage.getItem("insights")) || [];
+  const approved = stored.filter(i => i.status === "approved");
+  setInsights(approved);
+}, []);
   const [filters, setFilters] = useState({
     property: [],
     region: [],

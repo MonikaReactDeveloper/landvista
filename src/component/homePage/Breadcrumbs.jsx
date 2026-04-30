@@ -1,45 +1,42 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function Breadcrumbs() {
-  const location = useLocation();
+  const { slug, capSlug } = useParams();
 
-  const pathnames = location.pathname.split("/").filter(Boolean);
+  const services =
+    JSON.parse(localStorage.getItem("services")) || [];
 
-  // Convert slug → readable text
-  const format = (str) =>
-    str
-      .replace(/-/g, " ")
-      .replace(/\b\w/g, (c) => c.toUpperCase());
+  const service = services.find((s) => s.slug === slug);
+  const capability = service?.capabilities?.find(
+    (c) => c.slug === capSlug
+  );
 
   return (
-    <div className="w-full border-b border-gray-200 bg-white">
-      <div className="max-w-[1280px] mx-auto px-6 py-4 text-sm text-gray-600 flex items-center gap-2">
+    <div className="border-b bg-white">
+      <div className="max-w-[1200px] mx-auto px-6 py-3 text-sm flex gap-2">
 
-        {/* Home */}
-        <Link to="/" className="hover:text-black">
-          Home
-        </Link>
+        <Link to="/">Home</Link>
+        <span>/</span>
 
-        {pathnames.map((value, index) => {
-          const to = "/" + pathnames.slice(0, index + 1).join("/");
-          const isLast = index === pathnames.length - 1;
+        <Link to="/services">Services</Link>
 
-          return (
-            <span key={to} className="flex items-center gap-2">
-              <span>/</span>
+        {service && (
+          <>
+            <span>/</span>
+            <Link to={`/services/${service.slug}`}>
+              {service.title}
+            </Link>
+          </>
+        )}
 
-              {isLast ? (
-                <span className="text-gray-900 font-medium">
-                  {format(value)}
-                </span>
-              ) : (
-                <Link to={to} className="hover:text-black">
-                  {format(value)}
-                </Link>
-              )}
+        {capability && (
+          <>
+            <span>/</span>
+            <span className="font-medium">
+              {capability.title}
             </span>
-          );
-        })}
+          </>
+        )}
       </div>
     </div>
   );
