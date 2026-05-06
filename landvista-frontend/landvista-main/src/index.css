@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   BASE STYLES
+========================= */
+@layer base {
+  body {
+    @apply bg-landvista-bg text-landvista-charcoal antialiased;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-black tracking-tighter uppercase;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+}
+
+/* =========================
+   TYPOGRAPHY UTILITIES
+========================= */
+@layer utilities {
+  .text-primary {
+    @apply text-landvista-charcoal;
+  }
+
+  .text-secondary {
+    @apply text-landvista-grey;
+  }
+
+  .text-muted {
+    @apply text-landvista-grey/60;
+  }
+}
+
+/* =========================
+   SURFACE COMPONENTS
+========================= */
+@layer components {
+  .surface-card {
+    @apply bg-white border border-landvista-grey/10 rounded-2xl;
+  }
+
+  .surface-alt {
+    @apply bg-landvista-alt border border-landvista-grey/5 rounded-2xl;
+  }
+
+  .btn-primary {
+    @apply bg-landvista-blue hover:bg-landvista-blue-hover active:bg-landvista-blue-active text-white px-8 py-3 rounded-xl font-black text-[11px] uppercase tracking-widest transition-all;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-landvista-slate text-landvista-slate hover:bg-landvista-slate hover:text-white px-8 py-3 rounded-xl font-black text-[11px] uppercase tracking-widest transition-all;
+  }
+}
+
+/* =========================
+   PRINT STYLES
+========================= */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #invoice,
+  #invoice * {
+    visibility: visible;
+  }
+
+  #invoice {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}

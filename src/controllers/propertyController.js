@@ -1,29 +1,55 @@
 const Property = require('../models/propertyModel');
 
-// CREATE property
+// Create a new property menu item
 exports.createProperty = async (req, res) => {
   try {
-    const property = await Property.create(req.body);
-    res.json(property);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    const property = new Property(req.body);
+    await property.save();
+    res.status(201).json(property);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 };
 
-// GET all properties
+// Get all property menu items
 exports.getProperties = async (req, res) => {
-  const data = await Property.find();
-  res.json(data);
+  try {
+    const properties = await Property.find();
+    res.json(properties);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
-// GET single property
+// Get a single property menu item by ID
 exports.getProperty = async (req, res) => {
-  const data = await Property.findById(req.params.id);
-  res.json(data);
+  try {
+    const property = await Property.findById(req.params.id);
+    if (!property) return res.status(404).json({ error: 'Property not found' });
+    res.json(property);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
-// DELETE property
+// Update a property menu item
+exports.updateProperty = async (req, res) => {
+  try {
+    const property = await Property.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!property) return res.status(404).json({ error: 'Property not found' });
+    res.json(property);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+// Delete a property menu item
 exports.deleteProperty = async (req, res) => {
-  await Property.findByIdAndDelete(req.params.id);
-  res.json({ message: "Deleted" });
+  try {
+    const property = await Property.findByIdAndDelete(req.params.id);
+    if (!property) return res.status(404).json({ error: 'Property not found' });
+    res.json({ message: 'Property deleted' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };

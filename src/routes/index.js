@@ -13,6 +13,7 @@ import { authMiddleware } from "../middleware/auth.middleware.js";
 import { checkRole } from "../middleware/role.middleware.js";
 import serviceRoutes from "./serviceRoutes.js";
 import insightRoutes from "./insightRoutes.js";
+import homeRoutes from "../modules/home/home.routes.js";
 
 const router = express.Router();
 
@@ -25,6 +26,7 @@ router.get("/", (req, res) => {
 router.use("/auth", authRoutes);
 router.use("/services", serviceRoutes);
 router.use("/insights", insightRoutes);
+router.use("/home", homeRoutes);
 
 // ✅ Admin route
 // 🔥 ADMIN

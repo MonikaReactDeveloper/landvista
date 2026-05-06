@@ -1,6 +1,7 @@
-import { verifyToken } from "../utils/jwt.js";
+const { verifyToken } = require("../utils/jwt");
 
-export const authMiddleware = (req, res, next) => {
+const authMiddleware = async (req, res, next) => {
+
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
@@ -11,9 +12,30 @@ export const authMiddleware = (req, res, next) => {
 
   try {
     const decoded = verifyToken(token);
-    req.user = decoded;
+    const User = require("../modules/auth/auth.model");
+    const user = await User.findById(decoded.id);
+
+    if (!user) {
+      return res.status(401).json({ message: "User no longer exists" });
+    }
+
+    if (user.status === "suspended") {
+      return res.status(403).json({ message: "Your institutional access has been suspended." });
+    }
+
+    if (decoded.tokenVersion !== undefined && user.tokenVersion !== decoded.tokenVersion) {
+      return res.status(401).json({ message: "Session expired. Your access privileges were updated. Please log in again." });
+    }
+
+    // Attach full user object to request
+    req.user = user;
     next();
   } catch (err) {
-    return res.status(401).json({ message: "Invalid token" });
+    return res.status(401).json({ message: "Session invalid or expired" });
   }
+
+};
+
+module.exports = {
+  authMiddleware,
 };

@@ -5,12 +5,14 @@ const {
   createProperty,
   getProperties,
   getProperty,
+  updateProperty,
   deleteProperty
 } = require('../controllers/propertyController');
 
-router.post('/property', createProperty);
-router.get('/property', getProperties);
-router.get('/property/:id', getProperty);
-router.delete('/property/:id', deleteProperty);
+router.post('/', createProperty);
+router.get('/', getProperties);
+router.get('/:id', getProperty);
+router.put('/:id', updateProperty);
+router.delete('/:id', deleteProperty);
 
 module.exports = router;
